@@ -18,15 +18,70 @@
     <div @click="changeTitle">
         Change book title
     </div>
-    <h1 v-if="showBooks">book 1 book 2 book 3</h1>
+
+    <!---
+    Eventet måste inte skickas in, men det första eventet som skickas in är alltid eventet som triggar funktionen. 
+    Så i det här fallet så kommer $event att vara det eventet som triggar mouseover, mouseleave eller dblclick.
+    Därför måste man manuellt skicka med event ifall man också vill skicka med ytterligare ett argument.
+    -->
+    <div class="boxes">
+        <div @mouseover="handleMultipleParametersEvent($event, 5)">mouseover</div>  
+        <div @mouseleave="handleEvent">mouseleave</div>
+        <div @dblclick="handleEvent">click</div>
+        <div @mousemove="handleEvent">mousemove</div>
+    </div>
+
+    <div v-if="showBooks" class="booksList">
+        <ul>
+            <li v-for="(book, index) in books" :key="index" :class="{ fav: book.isFav }" @click="toggleFav(book)">
+                <h1>{{ book.title }}</h1>
+                <p>{{ book.author }}</p>
+                <img :src="book.img" alt="Book Image" width="100">
+            </li>
+            
+        </ul>
+    </div>
    </div>
 
    <script src="app.js"></script>
    <style>
+
+    li.fav {
+        background: rgb(185, 229, 185) !important;
+    }
+
+    .booksList ul li {
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        background: lightgray;
+        gap: 2rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem;
+        align-items: center;
+    }
+
        .buttons {
            display: flex;
            gap: 10px;
            margin-bottom: 20px;
+       }
+
+       .boxes {
+           display: flex;
+           gap: 10px;
+       }
+
+       .boxes div {
+           width: 100px;
+           height: 100px;
+           padding: 1rem;
+           background-color: lightblue;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           cursor: pointer;
        }
    </style>
 </body>
