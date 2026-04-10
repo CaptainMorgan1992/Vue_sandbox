@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+</head>
+<body>
+   <div id="app">
+    <h1>title : {{ title }}</h1>
+    <p>age : {{ age }}</p>
+    <div class="buttons">
+        <button @click="age++">Increase Age</button>
+        <button @click="age--">Decrease Age</button>
+        <button @click="showBooks = !showBooks">Toggle Books</button>
+    </div>
+    <div @click="changeTitle">
+        Change book title
+    </div>
+    <h1 v-if="showBooks">book 1 book 2 book 3</h1>
+   </div>
+
+   <script src="app.js"></script>
+   <style>
+       .buttons {
+           display: flex;
+           gap: 10px;
+           margin-bottom: 20px;
+       }
+   </style>
+</body>
+</html>
